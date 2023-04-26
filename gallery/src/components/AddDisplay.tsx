@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import {useParams, useNavigate} from 'react-router-dom'
 
 export interface Artwork {
     id: number;
@@ -17,14 +18,17 @@ export interface Artwork {
     updateLink: string;
   }
 
-const Test = () => {
-    const [artworks, setArtworks] = useState<Artwork[] | null>()
+const AddDisplay = () => {
 
-    const handleArtworks = () => {
-        axios.get('https://api.artic.edu/api/v1/artworks/129884/?fields=id,title,image_id,api_link,date_start,date_end,place_of_origin,artist_title,artwork_type_title,alt_text,iiif_url').then((response) => {
+    const {id} = useParams<{id: string}>()
+    const [artwork, setArtwork] = useState<Artwork | null>()
+    const navigate = useNavigate()
+
+    const handleArtwork = () => {
+        axios.get(`https://api.artic.edu/api/v1/artworks/${id}/?fields=id,title,image_id,api_link,date_start,date_end,place_of_origin,artist_title,artwork_type_title,alt_text,iiif_url`).then((response) => {
           console.log(response.data.data)
           console.log(response.data.config)
-          const artworksData =  [{
+          const artworkData =  {
             id: response.data.data.id,
             title: response.data.data.title,
             image_id: response.data.data.image_id,
@@ -37,33 +41,38 @@ const Test = () => {
             iiif_url: response.data.config.iiif_url,
             imageSrc: `${response.data.config.iiif_url}/${response.data.data.image_id}//full/843,/0/default.jpg`,
             updateLink: `https://api.artic.edu/api/v1/artworks/${response.data.data.id}/?fields=id,title,image_id,api_link,date_start,date_end,place_of_origin,artist_title,artwork_type_title,alt_text,iiif_url`,
-          }]
-          setArtworks(artworksData)
+          }
+          setArtwork(artworkData)
         }).catch((error) => {
           console.log(error)
         })
       }
+      const handleAdd = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault()
+        axios.post('http://localhost:3000/artworks', artwork).then((response) => {
+          navigate('/artworks')
+        })
+      }
       useEffect(() => {
-        handleArtworks()
+        handleArtwork()
       }, [])
       return (
         <div>
-            {artworks ?
-            artworks.map((artwork) => {
-              return <><p key={artwork.id}>{artwork.title}</p></>
-            })
+            {artwork 
+            ? 
+            <div>
+              <h2 key={artwork.id}>{artwork.title}</h2>
+              <button onClick={handleAdd}>Add Artwork</button>
+            </div>
           : <p>Loading...</p>}
          </div>
       )
 }
 
 
-
-
-
-
-
-
-
-
-export default Test
+export default AddDisplay 
+// , {
+//   headers: {
+//     'Access-Control-Allow-Origin': '*'
+//   }
+//   }
