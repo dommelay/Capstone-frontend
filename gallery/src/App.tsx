@@ -1,34 +1,31 @@
 import React from 'react'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import { BrowserRouter, Route, Routes, } from 'react-router-dom'
+import { Link, BrowserRouter, Route, Routes, } from 'react-router-dom'
 import './App.css'
-import AddDisplay from './components/AddDisplay'
+import ArtworkCR from './components/ArtworkCR'
 import Search from './components/Search'
-import MyArtwork from './components/Artworks'
+import Artworks from './components/Artworks'
+import Gallery from './components/Gallery'
+import ArtworkRUD from './components/ArtworkRUD'
+
 
 const App = () => {
-//  const [favArtworks, setFavArtworks] = useState([])
-
-//  const handleFavArtowrks = () => {
-//   axios.get('http://localhost:3000/artworks').then((response) => {
-//     setFavArtworks(response.data)
-//   })
-//  }
-
-//  useEffect(() => {
-//   handleFavArtowrks()
-//  }, [])
 
   return (
+    <>
     <BrowserRouter>
       <Routes>
-        <Route path='/artworks' element={<MyArtwork/>}/>
-        <Route path='/artworks/:id' element={<AddDisplay/>}/>
+        
+        <Route path='/gallery' element={<Gallery/>}/>
+        <Route path='/artworks/:id' element={<ArtworkCR/>}/>
         <Route path='/artworks/search' element={<Search/>}/>
+        <Route path='/my-artworks' element={<Artworks/>}/>
+        <Route path='/my-artworks/:id' element={<ArtworkRUD/>}/>
 
       </Routes>
     </BrowserRouter>
+    </>
   )
   
 }
