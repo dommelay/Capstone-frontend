@@ -38,6 +38,9 @@ return (
     <>
     <div className='myartworkscontainer'>
     <div className='nav'>
+      <Link to = {'/gallery'}>
+         <h4>Home</h4>
+      </Link>
       <Link to={'/my-artworks'}>
         <h4>My Artworks</h4>
       </Link>
@@ -58,6 +61,7 @@ return (
                 <h2>{artwork.title}</h2>
                 <h2>{artwork.marker}</h2>
                 <h2>{artwork._id}</h2>
+                <h2>{artwork.imageSrc}</h2>
                 <img src={artwork.imageSrc}/>
 
                     <button onClick={handleDelete}>Delete</button>
