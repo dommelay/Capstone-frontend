@@ -61,12 +61,16 @@ const ArtworkCR = () => {
       return (
         <div>
            <div className='nav'>
-      <Link to={'/my-artworks'}>
-        <h4>My Artworks</h4>
-      </Link>
-      <Link to = {'/artworks/search'}>
-        <h4>Search Artworks</h4>
-      </Link>
+           <Link to = {'/gallery'}>
+                <h4>Home</h4>
+            </Link>
+          <Link to={'/my-artworks'}>
+            <h4>My Artworks</h4>
+          </Link>
+          <Link to = {'/artworks/search'}>
+            <h4>Search Artworks</h4>
+          </Link>
+      
     </div>
             {artwork 
             ? 

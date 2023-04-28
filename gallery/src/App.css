@@ -6,3 +6,7 @@
     flex-direction: column;
     padding: 20px;
 }
+#galleryimg {
+    width: 850px;
+    height: auto;
+}
