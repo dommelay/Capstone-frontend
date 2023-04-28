@@ -2,7 +2,7 @@
 
 Gallery is a website application that allows users to search through the Art Institue of Chicago's databse and collect their favorite artworks. Technologies used: TypeScript, MERN (MongoDB, Express, React + Router, Node), RESTful API, third party API. App is capable of CRD functionality.
 
-## Frequently merging with the main branch to display progress. Deadline: May 1.
+Frequently merging with the main branch to display progress. Deadline: May 1.
 
 # Developer Notes
 
