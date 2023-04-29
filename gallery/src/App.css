@@ -7,6 +7,39 @@
     padding: 20px;
 }
 #galleryimg {
-    width: 850px;
+    width: 875px;
     height: auto;
 }
+#artlogo {
+    width: 55px;
+    height: auto;
+}
+#artlogodiv {
+    margin-left: auto;
+    padding: 3px 10px 0px 0px;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px 0px 10px;
+    background-color: #C0C0C0;
+    align-items: center;
+}
+#middlenav {
+    margin: 0px 20px 0px 20px;
+}
+.navlink {
+    font-size: 18px;
+}
+body {
+    background-color: #DCDCDC;
+}
+#galleryimgdiv {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+#topnav {
+    padding-left: 10px;
+}
+

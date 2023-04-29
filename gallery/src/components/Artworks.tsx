@@ -39,7 +39,7 @@ return (
     <div className='myartworkscontainer'>
     <div className='nav'>
       <Link to = {'/gallery'}>
-         <h4>Home</h4>
+         <h4 className='navlink'>Home</h4>
       </Link>
       <Link to={'/my-artworks'}>
         <h4>My Artworks</h4>
