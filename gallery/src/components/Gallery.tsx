@@ -29,11 +29,14 @@ const Gallery = () => {
             <img id='artlogo' src={process.env.PUBLIC_URL + '/ArtLogo.png'} ></img>
             </div>
       </div>
+      <div id='gallerycontainer'>
         <div id='galleryimgdiv'>
-            <img id='galleryimg'src='https://artic-web.imgix.net/1bded726-d44b-49dd-9eea-279d06052341/IPD-2165_press.jpg?rect=0%2C0%2C3000%2C2096&auto=format%2Ccompress&q=80&fit=crop&crop=faces%2Cedges%2Centropy&w=1200&h=838'/>
+            
         </div>
-        <div>
-            <h1>Gallery</h1>
+      </div>
+        <div id='galleryinfocontainer'>
+            <h1 id='gallery'>Gallery</h1>
+            <img id='infologo' src={process.env.PUBLIC_URL + '/ArtLogo.png'}/>
         </div>
         
         </>
@@ -44,3 +47,5 @@ const Gallery = () => {
 export default Gallery
 
 //responsive design, have bottom text move right as ecreen enlarges; flex column to flex row with media query
+
+

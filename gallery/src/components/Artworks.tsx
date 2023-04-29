@@ -35,19 +35,30 @@ const MyArtwork = () => {
 },[])
 
 return (
+    
     <>
-    <div className='myartworkscontainer'>
-    <div className='nav'>
-      <Link to = {'/gallery'}>
-         <h4 className='navlink'>Home</h4>
-      </Link>
-      <Link to={'/my-artworks'}>
-        <h4>My Artworks</h4>
-      </Link>
-      <Link to = {'/artworks/search'}>
-        <h4>Search Artworks</h4>
-      </Link>
+<div className='nav'>
+    <div id='topnav'>
+        <Link style={{ textDecoration: 'none' }} to = {'/gallery'}>
+                <h4 className='navlink'>Home</h4>
+        </Link>
     </div>
+    <div id='middlenav'> 
+        <Link style={{ textDecoration: 'none' }} to = {'/artworks/search'}>
+            <h4 className='navlink'>Search Artworks</h4>
+        </Link>
+    </div>
+    <div>
+        <Link style={{ textDecoration: 'none' }} to={'/my-artworks'}>
+            <h4 className='navlink'>My Artworks</h4>
+        </Link>
+    </div>
+    <div id='artlogodiv'>
+        <img id='artlogo' src={process.env.PUBLIC_URL + '/ArtLogo.png'} ></img>
+    </div>
+</div>
+   
+    <div className='myartworkscontainer'>
 
     {artworks.map((artwork) => {
         const handleDelete = (event: React.MouseEvent <HTMLButtonElement, MouseEvent>) => {
@@ -71,7 +82,7 @@ return (
     </div>
   
     {/* <button onClick={handleDelete}>Delete</button> */}
-    </>
+   </> 
 )
 
     {/* <button onClick={handleDelete}>Delete</button> */}
