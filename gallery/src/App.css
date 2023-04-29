@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 .myartwork {
     border: solid salmon;
 }
@@ -6,7 +8,80 @@
     flex-direction: column;
     padding: 20px;
 }
-#galleryimg {
-    width: 850px;
+#galleryimgdiv {
+    width: 100%;
+    height: 450px;
+    background-image: url('https://www.artic.edu/iiif/2/c617e2f0-d5fe-0772-390e-6d8c83895815/full/843,/0/default.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+#artlogo {
+    width: 55px;
     height: auto;
 }
+#artlogodiv {
+    margin-left: auto;
+    padding: 3px 0px 0px 0px;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px 15px 10px;
+    align-items: center;
+}
+#middlenav {
+    margin: 0px 20px 0px 20px;
+}
+.navlink {
+    font-size: 18px;
+    color: black;
+}
+body {
+    background-color: #e6e6e6;
+    font-family: 'Questrial', sans-serif;
+}
+button {
+    font-family: 'Questrial', sans-serif;
+}
+#galleryimgdiv {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: solid #f1f1f1;
+}
+#infologo {
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+}
+#galleryinfocontainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+#gallery {
+    font-size: 70px;
+    margin: 40px 0px 40px 0px;
+}
+@media  (max-width: 500px) {
+    .navlink {
+        font-size: 16px;
+    }
+    #middlenav {
+        margin: 0px 10px 0px 10px;
+    }
+    #gallery {
+        margin-bottom: 30px;
+    }
+    #infologo {
+        width: 75px;
+    }
+    #gallery {
+        font-size: 60px;
+        margin-top: 35px;
+    }
+}
+

@@ -43,6 +43,7 @@ const ArtworkCR = () => {
             updateLink: `https://api.artic.edu/api/v1/artworks/${response.data.data.id}/?fields=id,title,image_id,api_link,date_start,date_end,place_of_origin,artist_title,artwork_type_title,alt_text,iiif_url`,
           }
           setArtwork(artworkData)
+          console.log(artworkData)
         }).catch((error) => {
           console.log(error)
         })
@@ -60,24 +61,35 @@ const ArtworkCR = () => {
 
       return (
         <div>
-           <div className='nav'>
-           <Link to = {'/gallery'}>
-                <h4>Home</h4>
-            </Link>
-          <Link to={'/my-artworks'}>
-            <h4>My Artworks</h4>
-          </Link>
-          <Link to = {'/artworks/search'}>
-            <h4>Search Artworks</h4>
-          </Link>
-      
-    </div>
+         <div className='nav'>
+            <div id='topnav'>
+                <Link style={{ textDecoration: 'none' }} to = {'/gallery'}>
+                        <h4 className='navlink'>Home</h4>
+                </Link>
+            </div>
+            <div id='middlenav'> 
+                <Link style={{ textDecoration: 'none' }} to = {'/artworks/search'}>
+                <h4 className='navlink'>Search Artworks</h4>
+                </Link>
+            </div>
+            <div>
+                <Link style={{ textDecoration: 'none' }} to={'/my-artworks'}>
+                <h4 className='navlink'>My Artworks</h4>
+                </Link>
+            </div>
+            <div id='artlogodiv'>
+              <img id='artlogo' src={process.env.PUBLIC_URL + '/ArtLogo.png'} ></img>
+            </div>
+        </div>
             {artwork 
             ? 
             <div>
               <h2 key={artwork.marker}>{artwork.title}</h2>
               <h2>{artwork.artist_title}</h2>
+              {artwork.image_id != null ?
               <img src={artwork.imageSrc}/>
+              : <h2>Sorry, there is no available image for this search</h2>
+              }
               {added
               ? 
               <><h2>{artwork.title} added to your collection!</h2></>
