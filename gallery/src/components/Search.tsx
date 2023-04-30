@@ -2,22 +2,43 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import randomWords from 'random-words'
+import {generateSlug } from 'random-word-slugs'
+
+export interface RandomArtwork {
+    imageSrc: string,
+    title: string,
+    id: string,
+}
 
 const Search = () => {
 const [searchParam, setSearchParam] = useState('')
 const [searchedArtworks, setSearchedArtworks] = useState([])
 const [search, setSearch] = useState(false)
-const randomSearch: string[] = randomWords({exactly: 2})
-const [randomSearchString, setRandomSearchString] = useState('')
 const [loading, setLoading] = useState(false)
+const [randomArtwork, setRandomArtwork] = useState<RandomArtwork | null>()
 
 const randomSearchGeneration = () => {
-    const first = randomSearch[0]
-    const second = randomSearch[1]
-    const string = randomSearch[0] + randomSearch[1]
-    const randomString = string.split(' ').join('-')
-    setSearchParam(randomString)
+    const word = generateSlug(1)[0]
+    const slug = word.toString().split('').join('-')
+    console.log(typeof(slug))
+    axios.get(`https://api.artic.edu/api/v1/artworks/search?q=${slug}`).then((response) => {
+        if (response && response.data && response.data.data) {
+        const id = (response.data.data[0].id).toString()
+        axios.get(`https://api.artic.edu/api/v1/artworks/${id}`).then((response) => {
+        const random = {
+            imageSrc: `${response.data.config.iiif_url}/${response.data.data.image_id}/full/843,/0/default.jpg`,
+            title: response.data.data.title,
+            id: response.data.data.id,
+        }
+        setRandomArtwork(random)
+    })
+        } else {
+            randomSearchGeneration()
+        } 
+    }).catch((error) => {
+        console.log(error)
+        randomSearchGeneration()
+      })
 }
 const handleConcatination = () => {
     const input = searchParam.toString().split(' ').join('-')
@@ -42,7 +63,7 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
 }
 
 useEffect(() => {
-    console.log(randomSearch)
+    randomSearchGeneration()
 }, [])
 
     return (
@@ -100,7 +121,14 @@ useEffect(() => {
                 ( search === false ?
                     <>
                     <div>
-                        <h1>Search Display</h1>
+                        <h1>Don't know what to search? Generate an artwork randomly!</h1>
+                        { randomArtwork ?
+                        <div>
+                        <img src={randomArtwork.imageSrc}/>
+                        <Link to={`/artworks/${randomArtwork.id}`}>{randomArtwork.id}</Link>
+                        </div>
+                           :
+                           <></> }
                     </div>
                     </>
                 : 
