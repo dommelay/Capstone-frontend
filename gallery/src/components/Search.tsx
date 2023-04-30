@@ -2,12 +2,23 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import randomWords from 'random-words'
 
 const Search = () => {
 const [searchParam, setSearchParam] = useState('')
 const [searchedArtworks, setSearchedArtworks] = useState([])
 const [search, setSearch] = useState(false)
+const randomSearch: string[] = randomWords({exactly: 2})
+const [randomSearchString, setRandomSearchString] = useState('')
+const [loading, setLoading] = useState(false)
 
+const randomSearchGeneration = () => {
+    const first = randomSearch[0]
+    const second = randomSearch[1]
+    const string = randomSearch[0] + randomSearch[1]
+    const randomString = string.split(' ').join('-')
+    setSearchParam(randomString)
+}
 const handleConcatination = () => {
     const input = searchParam.toString().split(' ').join('-')
     setSearchParam(input)
@@ -17,6 +28,7 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 }
 const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setSearch(true)
+    setLoading(true)
     event.preventDefault()
     handleConcatination()
     axios.get(`https://api.artic.edu/api/v1/artworks/search?q=${searchParam}`).then((response) => {
@@ -24,9 +36,14 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
         console.log(response.data)
         setSearchedArtworks(response.data.data)
         }
+        setLoading(false)
     })
     setSearchParam('')
 }
+
+useEffect(() => {
+    console.log(randomSearch)
+}, [])
 
     return (
         <div>
@@ -87,14 +104,13 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
                     </div>
                     </>
                 : 
-                ( searchedArtworks.length == 0 && search == true ?
+                ( loading ? <></> 
+                :
                 <>
                     <div>
                         <h2>Sorry, there are no results that match your search criteria. Please search again!</h2>
                     </div>
                   </>
-                  :
-                  <></>
                 )
                 )
                 }
