@@ -64,7 +64,7 @@ return (
     <div className='myartworkscontainer'>
 
     {artworks.map((artwork) => {
-        const handleDelete = (event: React.MouseEvent <HTMLButtonElement, MouseEvent>) => {
+        const handleDelete = (event: React.MouseEvent <HTMLDivElement, MouseEvent>) => {
             event.preventDefault()
             axios.delete(`http://localhost:3000/my-artworks/${artwork._id}`).then((response) => {
                 handleArtworks()
@@ -82,10 +82,21 @@ return (
                 </div>
                 <div className='myartworkinfo'>
                     <h1 className='myartworktitle'>{artwork.title}</h1>
-                    <p className='myartworkdetail artist'>{artwork.artist_title}</p>
-                    <p className='myartworkdetail date'>{artwork.date_start} - {artwork.date_end}</p>
+                    <div className='myartworkdetailcontainer'>
+                        <div>
+                            <p className='myartworkdetail artist'>{artwork.artist_title}</p>
+                            <p className='myartworkdetail date'>{artwork.date_start} - {artwork.date_end}</p>
+                        </div>
+                        <div className='origintypediv'>
+                            <p className='myartworkdetail origin'>{artwork.place_of_origin}</p>
+                            <p className='myartworkdetail type'>{artwork.artwork_type_title}</p> 
+                        </div>
+                        <div onClick={handleDelete}className='deletediv'>
+                            <h5 className='deletex'>X</h5>
+                        </div>
+                    </div>
                 </div>
-                    <button className='deletebttn'onClick={handleDelete}>Delete</button>
+                    {/* <button className='deletebttn'onClick={handleDelete}>Delete</button> */}
             </div>
             : <></> 
             }

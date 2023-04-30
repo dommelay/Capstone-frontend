@@ -28,8 +28,6 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
     setSearchParam('')
 }
 
-
-
     return (
         <div>
        <div className='nav'>
@@ -60,17 +58,24 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
                 <input onChange={handleChange} type='text' name='search'/>
                 <button type='submit' onClick={handleSubmitSearch}>Search</button>
             </form>
-            
+            <div className='searchcontainer'>
             {searchedArtworks.length != 0
              && search === true ? searchedArtworks.map((artwork:{id: number, title: string, alt_text: string, thumbnail: {alt_text: string}}) => {
                 
                 return (  
                     <div className='searchedArt'>
-                        <Link to={`/artworks/${artwork.id}`}>{artwork.id}</Link>
-                        <h2>{artwork.title}</h2>
+                    
+                            <Link to={`/artworks/${artwork.id}`}><h5 className='searchid'>{artwork.id}</h5></Link>
+                        <div className='searchinfo'>
+                            <h2 className='searchtitle'>{artwork.title}</h2>
+                        
                         {artwork.thumbnail != null ?
-                        <h2>{artwork.thumbnail.alt_text}</h2>
-                        : <>Description unavailable</>}
+                        <>
+                            <h2 className='searchthumbnail'>{artwork.thumbnail.alt_text}</h2>
+                        </>
+                        : <>
+                        <h2 className='searchthumbnail'>Description unavailable</h2></>}
+                        </div>
                     </div> 
                   )
                 })
@@ -82,7 +87,7 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
                     </div>
                     </>
                 : 
-                ( searchedArtworks.length && search == true ?
+                ( searchedArtworks.length == 0 && search == true ?
                 <>
                     <div>
                         <h2>Sorry, there are no results that match your search criteria. Please search again!</h2>
@@ -93,6 +98,7 @@ const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement, MouseEven
                 )
                 )
                 }
+                </div>
     
         </div>
 
