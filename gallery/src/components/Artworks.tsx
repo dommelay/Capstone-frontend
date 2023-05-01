@@ -96,7 +96,6 @@ return (
                         </div>
                     </div>
                 </div>
-                    {/* <button className='deletebttn'onClick={handleDelete}>Delete</button> */}
             </div>
             : <></> 
             }
@@ -105,11 +104,9 @@ return (
     })}
     </div>
   
-    {/* <button onClick={handleDelete}>Delete</button> */}
    </> 
 )
 
-    {/* <button onClick={handleDelete}>Delete</button> */}
 
 
 
