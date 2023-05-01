@@ -22,6 +22,7 @@ export interface MyArtwork {
 const MyArtwork = () => {
    const [artworks, setArtworks] = useState<MyArtwork[]>([])
    const navigate = useNavigate()
+   const [fullsize, setFullsize] = useState(true)
    
    const handleArtworks = () => {
     axios.get('http://localhost:3000/my-artworks').then((response) => {
@@ -57,26 +58,49 @@ return (
         <img id='artlogo' src={process.env.PUBLIC_URL + '/ArtLogo.png'} ></img>
     </div>
 </div>
-   
+   <div id='myartworksdiv'>
+        <h1 id='myartworks'>My Artworks</h1>
+   </div>
     <div className='myartworkscontainer'>
 
     {artworks.map((artwork) => {
-        const handleDelete = (event: React.MouseEvent <HTMLButtonElement, MouseEvent>) => {
+        const handleDelete = (event: React.MouseEvent <HTMLDivElement, MouseEvent>) => {
             event.preventDefault()
             axios.delete(`http://localhost:3000/my-artworks/${artwork._id}`).then((response) => {
                 handleArtworks()
             })
         } 
-        return (
-            <div className='myartwork'>
-                <h2>{artwork.title}</h2>
-                <h2>{artwork.marker}</h2>
-                <h2>{artwork._id}</h2>
-                <h2>{artwork.imageSrc}</h2>
-                <img src={artwork.imageSrc}/>
+        const handleShowMore = (event: React.MouseEvent <HTMLButtonElement, MouseEvent>) => {
 
-                    <button onClick={handleDelete}>Delete</button>
+        }
+        return (
+            <>
+            { fullsize ?
+            <div className='myartwork'>
+                <div className='myartworkimg'>
+                    <img src={artwork.imageSrc}/>
+                </div>
+                <div className='myartworkinfo'>
+                    <h1 className='myartworktitle'>{artwork.title}</h1>
+                    <div className='myartworkdetailcontainer'>
+                        <div>
+                            <p className='myartworkdetail artist'>{artwork.artist_title}</p>
+                            <p className='myartworkdetail date'>{artwork.date_start} - {artwork.date_end}</p>
+                        </div>
+                        <div className='origintypediv'>
+                            <p className='myartworkdetail origin'>{artwork.place_of_origin}</p>
+                            <p className='myartworkdetail type'>{artwork.artwork_type_title}</p> 
+                        </div>
+                        <div onClick={handleDelete}className='deletediv'>
+                            <h5 className='deletex'>X</h5>
+                        </div>
+                    </div>
+                </div>
+                    {/* <button className='deletebttn'onClick={handleDelete}>Delete</button> */}
             </div>
+            : <></> 
+            }
+            </>
         )
     })}
     </div>
