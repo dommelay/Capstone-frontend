@@ -76,7 +76,7 @@ button {
 .myartwork {
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
+    margin-top: 15px;
     border-bottom: 3px solid black;
 }
 .myartworkimg {
