@@ -50,7 +50,7 @@ const ArtworkCR = () => {
       }
       const handleAdd = (event: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
         event.preventDefault()
-        axios.post('http://localhost:3000/my-artworks', artwork).then((response) => {
+        axios.post('https://domsgallery.herokuapp.com/my-artworks', artwork).then((response) => {
           console.log(response)
           setAdded(true)
         })

@@ -25,13 +25,13 @@ const ArtworkRUD = () => {
     const [artwork, setArtwork] = useState<MyArtwork | null>()
 
     const handleArtwork = () => {
-        axios.get(`http://localhost:3000/my-artworks/${id}`).then((response) => {
+        axios.get(`https://domsgallery.herokuapp.com/my-artworks/${id}`).then((response) => {
             setArtwork(response.data)
         })
     }
     const handleDelete = (event: React.MouseEvent <HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
-        axios.delete(`http://localhost:3000/my-artworks/${id}`).then((response) => {
+        axios.delete(`https://domsgallery.herokuapp.com/my-artworks/${id}`).then((response) => {
             navigate('/gallery')
         })
     } 
