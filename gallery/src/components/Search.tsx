@@ -2,7 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import {generateSlug } from 'random-word-slugs'
+import randomWords from 'random-words'
 
 export interface RandomArtwork {
     imageSrc: string,
@@ -18,12 +18,11 @@ const [loading, setLoading] = useState(false)
 const [randomArtwork, setRandomArtwork] = useState<RandomArtwork | null>()
 
 const randomSearchGeneration = () => {
-    const word = generateSlug(1)[0]
-    const slug = word.toString().split('').join('-')
-    console.log(typeof(slug))
-    axios.get(`https://api.artic.edu/api/v1/artworks/search?q=${slug}`).then((response) => {
+    const randomWord: string = randomWords({ exactly: 1 })[0]
+    axios.get(`https://api.artic.edu/api/v1/artworks/search?q=${randomWord}`).then((response) => {
         if (response && response.data && response.data.data) {
         const id = (response.data.data[0].id).toString()
+        console.log(id)
         axios.get(`https://api.artic.edu/api/v1/artworks/${id}`).then((response) => {
         const random = {
             imageSrc: `${response.data.config.iiif_url}/${response.data.data.image_id}/full/843,/0/default.jpg`,
