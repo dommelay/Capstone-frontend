@@ -5,8 +5,6 @@ Gallery is a website application that allows users to search through the Art Ins
 ## Fun Feature
 Checkout the random search generator on the Search Artworks page!
 
-Frequently merging with the main branch to display progress. Deadline: May 1.
-
 # Developer Notes
 
 The main focus of the project was to learn and utilize a personally novel piece of technology. I chose to incorporate TypeScript due to the versatility of the language with varous frame works. Furthermore, I enjoy and prefer to use MERN for full stack development over other alternatives. 
