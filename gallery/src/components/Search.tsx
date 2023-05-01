@@ -15,10 +15,12 @@ const [searchParam, setSearchParam] = useState('')
 const [searchedArtworks, setSearchedArtworks] = useState([])
 const [search, setSearch] = useState(false)
 const [loading, setLoading] = useState(false)
+const [generatedWord, setGeneratedWord] = useState('')
 const [randomArtwork, setRandomArtwork] = useState<RandomArtwork | null>()
 
 const randomSearchGeneration = () => {
     const randomWord: string = randomWords({ exactly: 1 })[0]
+    setGeneratedWord(randomWord)
     axios.get(`https://api.artic.edu/api/v1/artworks/search?q=${randomWord}`).then((response) => {
         if (response && response.data && response.data.data) {
         const id = (response.data.data[0].id).toString()
@@ -38,6 +40,9 @@ const randomSearchGeneration = () => {
         console.log(error)
         randomSearchGeneration()
       })
+}
+const handleRandomSearch = (event: React.MouseEvent <HTMLHeadingElement, MouseEvent>) => {
+    randomSearchGeneration()
 }
 const handleConcatination = () => {
     const input = searchParam.toString().split(' ').join('-')
@@ -89,11 +94,11 @@ useEffect(() => {
          </div>
 
 
-            <h1>Search Artworks</h1>
+            <h1 id='searchtitle'>Search Artworks</h1>
             <form>
                 <label htmlFor='searchParam'></label>
                 <input onChange={handleChange} type='text' name='search'/>
-                <button type='submit' onClick={handleSubmitSearch}>Search</button>
+                <button className='CRsubmit'type='submit' onClick={handleSubmitSearch}>Search</button>
             </form>
             <div className='searchcontainer'>
             {searchedArtworks.length != 0
@@ -120,11 +125,15 @@ useEffect(() => {
                 ( search === false ?
                     <>
                     <div>
-                        <h1>Don't know what to search? Generate an artwork randomly!</h1>
+                        <h2>Don't know what to search? Generate an artwork randomly!</h2>
+                        <h1>This is an artwork we found by searching '{generatedWord}'</h1>
                         { randomArtwork ?
                         <div>
+                            <div className='searchadddiv'>
+                            <Link to={`/artworks/${randomArtwork.id}`}><h4 className='addsearch'>Add Artwork</h4></Link>
+                            <h4 className='randomsearch'onClick={handleRandomSearch}>Random Search</h4>
+                            </div>
                         <img src={randomArtwork.imageSrc}/>
-                        <Link to={`/artworks/${randomArtwork.id}`}>{randomArtwork.id}</Link>
                         </div>
                            :
                            <></> }

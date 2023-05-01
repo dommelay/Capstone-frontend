@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
+a {
+    text-decoration: none;
+}
 .myartworkscontainer {
     display: flex;
     flex-direction: column;
@@ -94,14 +96,6 @@ button {
 .myartworktitle {
     font-size: 40px;
 }
-/* .deletebttn {
-    font-size: 20px;
-    width: 175px;
-    align-self: center;
-    margin: 20px 0px 20px 0px;
-    border: none;
-    background-color: #e6e6e6;
-} */
 .deletex {
     font-size: 20px;
     margin-bottom: 20px;
@@ -147,25 +141,44 @@ button {
 .searchiddiv {
     margin: 15px 0px 15px 15px;
 }
-
 .searchthumbnail {
     font-size: 16px;
-    /* margin-right: 15px;
-    margin-left: 20px; */
 }
-/* .searchtitlediv {
-    width: 250px;
-    margin-left: 15px;
-}
-.searchthumbnaildiv {
-    width: 48%;
-} */
 .searchcontainer {
     padding: 25px 15px 15px 15px;
 }
-/* .searchtitle, .searchid, .searchthumbnail {
-    margin-top: 25px;
-} */
+.searchadddiv {
+    display: flex;
+    flex-direction: row;
+}
+.addsearch {
+    margin-top: 0px;
+}
+.randomsearch {
+    margin: 0px 0px 0px 25px;
+}
+.randomsearch, .addsearch, .handleadd {
+    color: #33007b;
+    font-size: 23px;
+}
+.addsearch:hover, .randomsearch:hover, .handleadd:hover {
+    text-decoration: underline;
+    cursor: default;
+}
+#searchtitle, form {
+    padding-left: 15px;;
+}
+
+.CRdiv {
+    padding-left: 15px;
+}
+.CRtitle {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+.CRartist {
+    margin-bottom: 45px;
+}
 @media  (max-width: 500px) {
     .navlink {
         font-size: 16px;
